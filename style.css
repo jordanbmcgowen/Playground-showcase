@@ -26,23 +26,23 @@
   --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
   --transition-medium: 400ms cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* iPhone 15 Pro screen area (% of 400x788 frame) */
-  --iphone-screen-left: 8.46%;
-  --iphone-screen-top: 9.44%;
-  --iphone-screen-width: 83.09%;
-  --iphone-screen-height: 86.27%;
+  /* iPhone 15 Pro screen area (% of 400x788 frame) — pixel-verified */
+  --iphone-screen-left: 8.50%;
+  --iphone-screen-top: 4.31%;
+  --iphone-screen-width: 83.00%;
+  --iphone-screen-height: 91.37%;
 
-  /* MacBook Pro 14 screen area (% of 800x520 frame) */
-  --macbook-screen-left: 11.66%;
-  --macbook-screen-top: 14.20%;
-  --macbook-screen-width: 76.67%;
-  --macbook-screen-height: 74.10%;
+  /* MacBook Pro 14 screen area (% of 800x520 frame) — pixel-verified */
+  --macbook-screen-left: 11.75%;
+  --macbook-screen-top: 11.73%;
+  --macbook-screen-width: 76.50%;
+  --macbook-screen-height: 76.54%;
 
-  /* iPad Pro 11 screen area (% of 500x690 frame) */
-  --ipad-screen-left: 5.87%;
-  --ipad-screen-top: 4.25%;
-  --ipad-screen-width: 88.25%;
-  --ipad-screen-height: 91.49%;
+  /* iPad Pro 11 screen area (% of 500x690 frame) — pixel-verified */
+  --ipad-screen-left: 6.00%;
+  --ipad-screen-top: 4.35%;
+  --ipad-screen-width: 88.00%;
+  --ipad-screen-height: 91.30%;
 }
 
 /* ============================================
@@ -239,7 +239,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   top: var(--iphone-screen-top);
   width: var(--iphone-screen-width);
   height: var(--iphone-screen-height);
-  border-radius: 16px;
+  border-radius: 6% / 3%;
 }
 
 /* MacBook screen area */
@@ -248,7 +248,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   top: var(--macbook-screen-top);
   width: var(--macbook-screen-width);
   height: var(--macbook-screen-height);
-  border-radius: 4px;
+  border-radius: 1.2% / 1.6%;
 }
 
 /* iPad screen area */
@@ -257,7 +257,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   top: var(--ipad-screen-top);
   width: var(--ipad-screen-width);
   height: var(--ipad-screen-height);
-  border-radius: 8px;
+  border-radius: 3% / 2.2%;
 }
 
 /* Screenshot image: fills width, overflows height for scroll */
