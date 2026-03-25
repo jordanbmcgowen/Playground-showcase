@@ -148,7 +148,8 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
     flex-direction: column;
     align-items: center;
     gap: var(--space-8);
-    padding: 80px 16px 80px;
+    padding: 80px 24px 80px;
+    overflow-x: hidden;
   }
 }
 
@@ -194,15 +195,15 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   }
 }
 
-/* Mobile: stacked with gentle rotation preserved */
+/* Mobile: stacked, no rotation to prevent visual overflow/overlap */
 @media (max-width: 767px) {
   .device {
-    transform: rotate(var(--rot));
+    transform: none;
     flex-shrink: 0;
-    max-width: 88vw;
+    width: 100%;
   }
   .device:active {
-    transform: rotate(0deg) scale(0.97);
+    transform: scale(0.97);
   }
 }
 
@@ -281,7 +282,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 
 /* Phone */
 .device--phone {
-  width: 160px;
+  max-width: 240px;
 }
 @media (min-width: 768px) {
   .device--phone {
@@ -296,7 +297,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 
 /* Laptop */
 .device--laptop {
-  width: 300px;
+  max-width: 480px;
 }
 @media (min-width: 768px) {
   .device--laptop {
@@ -311,7 +312,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 
 /* Tablet */
 .device--tablet {
-  width: 220px;
+  max-width: 340px;
 }
 @media (min-width: 768px) {
   .device--tablet {
