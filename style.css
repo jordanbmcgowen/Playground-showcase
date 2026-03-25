@@ -260,12 +260,17 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   border-radius: 3% / 2.2%;
 }
 
-/* Screenshot image: fills width, overflows height for scroll */
+/* Screenshot image: fills the clip area with no gaps.
+   min-height: 100% ensures landscape images fill the full clip height.
+   object-fit: cover scales up proportionally (no distortion).
+   Tall images overflow naturally and are scrolled by JS. */
 .device__screenshot {
   display: block;
   width: 100%;
   height: auto;
-  /* Start at top, will be translated by JS for scroll effect */
+  min-height: 100%;
+  object-fit: cover;
+  object-position: top center;
   transform: translateY(var(--scroll-y, 0px));
   will-change: transform;
 }
