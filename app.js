@@ -36,9 +36,6 @@
 
     requestAnimationFrame(() => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      // Normalized page scroll from 0 to 1
-      const scrollFraction = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
 
       entries.forEach(({ device, screenshot, clip }) => {
         const speed = parseFloat(device.dataset.scrollSpeed) || 0.1;
@@ -52,9 +49,10 @@
 
         if (maxTravel <= 0) return; // screenshot fits entirely, no scroll needed
 
-        // Scroll the screenshot within the device
-        // Use scroll fraction * speed multiplier, clamped to max travel
-        const travel = Math.min(scrollFraction * maxTravel * (speed / 0.1), maxTravel);
+        // Scroll the screenshot proportional to raw scrollTop so the rate
+        // (px of screenshot travel per px of page scroll) is identical on
+        // both mobile (tall stacked layout) and desktop (short scattered layout).
+        const travel = Math.min(scrollTop * speed, maxTravel);
         screenshot.style.transform = `translateY(${-travel}px)`;
       });
 
