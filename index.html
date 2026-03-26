@@ -31,14 +31,6 @@
 <body>
 
 <main class="scene">
-
-  <!-- Pendant lamp -->
-  <div class="lamp" aria-hidden="true">
-    <div class="lamp__cord"></div>
-    <div class="lamp__shade"></div>
-    <div class="lamp__bulb-glow"></div>
-  </div>
-
   <header class="site-header">
     <span class="site-name">jordan mcgowen</span>
   </header>
@@ -48,6 +40,7 @@
     <!-- Device 1: iPhone — RoomGen -->
     <a href="https://roomgen.app" target="_blank" rel="noopener noreferrer"
        class="device device--phone"
+       style="--x: 3%; --y: 8%; --rot: -7deg;"
        data-scroll-speed="0.15">
       <div class="device__screen-clip device__screen-clip--phone">
         <img class="device__screenshot" src="./assets/screen-roomgen.jpg" alt="" draggable="false">
@@ -62,6 +55,7 @@
     <!-- Device 2: MacBook — DineScores -->
     <a href="https://dinescores.com" target="_blank" rel="noopener noreferrer"
        class="device device--laptop"
+       style="--x: 15%; --y: 2%; --rot: 2deg;"
        data-scroll-speed="0.08">
       <div class="device__screen-clip device__screen-clip--laptop">
         <img class="device__screenshot" src="./assets/screen-dinescores.jpg" alt="" draggable="false">
@@ -73,23 +67,10 @@
       </div>
     </a>
 
-    <!-- Device 3: iPhone — Tight Lines 30A -->
-    <a href="https://tightlines30a.com" target="_blank" rel="noopener noreferrer"
-       class="device device--phone"
-       data-scroll-speed="0.12">
-      <div class="device__screen-clip device__screen-clip--phone">
-        <img class="device__screenshot" src="./assets/screen-tightlines30a.jpg" alt="" draggable="false">
-      </div>
-      <img class="device__frame" src="./assets/frame-iphone.png" alt="iPhone showing Tight Lines 30A" draggable="false">
-      <div class="device__label">
-        <span class="device__title">Tight Lines 30A</span>
-        <span class="device__desc">Live fly fishing forecast for Santa Rosa Beach. Real-time weather, tides, and solunar data.</span>
-      </div>
-    </a>
-
-    <!-- Device 4: iPad — Brand Intelligence -->
+    <!-- Device 3: iPad — Brand Intelligence -->
     <a href="https://molly-maid-strategy.pages.dev/" target="_blank" rel="noopener noreferrer"
        class="device device--tablet"
+       style="--x: 43%; --y: 3%; --rot: -3deg;"
        data-scroll-speed="0.10">
       <div class="device__screen-clip device__screen-clip--tablet">
         <img class="device__screenshot" src="./assets/screen-mollymaid.jpg" alt="" draggable="false">
@@ -101,9 +82,25 @@
       </div>
     </a>
 
+    <!-- Device 4: iPhone — Tight Lines 30A -->
+    <a href="https://tightlines30a.com" target="_blank" rel="noopener noreferrer"
+       class="device device--phone"
+       style="--x: 8%; --y: 52%; --rot: 6deg;"
+       data-scroll-speed="0.12">
+      <div class="device__screen-clip device__screen-clip--phone">
+        <img class="device__screenshot" src="./assets/screen-tightlines30a.jpg" alt="" draggable="false">
+      </div>
+      <img class="device__frame" src="./assets/frame-iphone.png" alt="iPhone showing Tight Lines 30A" draggable="false">
+      <div class="device__label">
+        <span class="device__title">Tight Lines 30A</span>
+        <span class="device__desc">Live fly fishing forecast for Santa Rosa Beach. Real-time weather, tides, and solunar data.</span>
+      </div>
+    </a>
+
     <!-- Device 5: MacBook — Interval Timer -->
     <a href="https://interval.jordanbmcgowen.workers.dev/" target="_blank" rel="noopener noreferrer"
        class="device device--laptop"
+       style="--x: 20%; --y: 50%; --rot: -3deg;"
        data-scroll-speed="0.08">
       <div class="device__screen-clip device__screen-clip--laptop">
         <img class="device__screenshot" src="./assets/screen-interval.jpg" alt="" draggable="false">
@@ -115,9 +112,10 @@
       </div>
     </a>
 
-    <!-- Device 6: iPad — Walking with Hospice -->
+    <!-- Device 7: iPad — Walking with Hospice -->
     <a href="https://walking-with-hospice.pages.dev/" target="_blank" rel="noopener noreferrer"
        class="device device--tablet"
+       style="--x: 60%; --y: 5%; --rot: 5deg;"
        data-scroll-speed="0.10">
       <div class="device__screen-clip device__screen-clip--tablet">
         <img class="device__screenshot" src="./assets/screen-walking-with-hospice.jpg" alt="" draggable="false">
@@ -129,21 +127,10 @@
       </div>
     </a>
 
-    <!-- Device 7: iPhone — Faithlens.app (coming soon) -->
-    <div class="device device--phone device--soon">
-      <div class="device__screen-clip device__screen-clip--phone device__screen-clip--dark">
-        <img class="device__screenshot" src="./assets/screen-faithlens.jpg" alt="" draggable="false">
-      </div>
-      <img class="device__frame" src="./assets/frame-iphone.png" alt="Faithlens.app coming soon" draggable="false">
-      <div class="device__label">
-        <span class="device__title">Faithlens.app</span>
-        <span class="device__desc">Coming soon.</span>
-      </div>
-    </div>
-
     <!-- Device 8: MacBook — LEGOLAND Game Plan -->
     <a href="https://legoland-game-plan.pages.dev" target="_blank" rel="noopener noreferrer"
        class="device device--laptop"
+       style="--x: 62%; --y: 50%; --rot: -4deg;"
        data-scroll-speed="0.08">
       <div class="device__screen-clip device__screen-clip--laptop">
         <img class="device__screenshot" src="./assets/screen-legoland-game-plan.jpg" alt="" draggable="false">
@@ -155,17 +142,26 @@
       </div>
     </a>
 
-  </div>
+    <!-- Device 6: iPhone — Faithlens.app (coming soon) -->
+    <div class="device device--phone device--soon"
+       style="--x: 47%; --y: 53%; --rot: 4deg;">
+      <div class="device__screen-clip device__screen-clip--phone device__screen-clip--dark">
+        <img class="device__screenshot" src="./assets/screen-faithlens.jpg" alt="" draggable="false">
+      </div>
+      <img class="device__frame" src="./assets/frame-iphone.png" alt="Faithlens.app coming soon" draggable="false">
+      <div class="device__label">
+        <span class="device__title">Faithlens.app</span>
+        <span class="device__desc">Coming soon.</span>
+      </div>
+    </div>
 
-  <div class="desk-surface" aria-hidden="true"></div>
-  <div class="scroll-hint" aria-hidden="true">scroll →</div>
+  </div>
 
   <footer class="site-footer">
     <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">
       Created with Perplexity Computer
     </a>
   </footer>
-
 </main>
 
 <script src="./app.js"></script>
