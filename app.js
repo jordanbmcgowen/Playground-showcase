@@ -1,32 +1,23 @@
 // ============================================
 // Scroll-linked screenshot scrolling within devices
-// As the user scrolls the page, the screenshots
-// inside each device scroll proportionally, creating
-// the illusion of browsing through each site.
+// As the user scrolls the device floor horizontally,
+// the screenshots inside each device scroll vertically,
+// creating the illusion of browsing through each site.
 // ============================================
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  const floor = document.getElementById('deviceFloor');
   const devices = document.querySelectorAll('.device[data-scroll-speed]');
-  if (!devices.length) return;
+  if (!devices.length || !floor) return;
 
-  // For each device, compute how far its screenshot can scroll
-  // within the visible screen area, then map page scroll to that range.
-  function setupScrollableScreenshots() {
-    const entries = [];
-
-    devices.forEach((device) => {
-      const screenshot = device.querySelector('.device__screenshot');
-      const clip = device.querySelector('.device__screen-clip');
-      if (!screenshot || !clip) return;
-
-      entries.push({ device, screenshot, clip });
-    });
-
-    return entries;
-  }
-
-  const entries = setupScrollableScreenshots();
+  const entries = [];
+  devices.forEach((device) => {
+    const screenshot = device.querySelector('.device__screenshot');
+    const clip = device.querySelector('.device__screen-clip');
+    if (!screenshot || !clip) return;
+    entries.push({ device, screenshot, clip });
+  });
 
   let ticking = false;
 
@@ -35,24 +26,18 @@
     ticking = true;
 
     requestAnimationFrame(() => {
-      const scrollTop = window.scrollY;
+      const scrollLeft = floor.scrollLeft;
 
       entries.forEach(({ device, screenshot, clip }) => {
         const speed = parseFloat(device.dataset.scrollSpeed) || 0.1;
 
-        // Get the actual rendered dimensions
         const clipHeight = clip.offsetHeight;
         const screenshotHeight = screenshot.offsetHeight;
-
-        // How far the screenshot can travel
         const maxTravel = screenshotHeight - clipHeight;
 
-        if (maxTravel <= 0) return; // screenshot fits entirely, no scroll needed
+        if (maxTravel <= 0) return;
 
-        // Scroll the screenshot proportional to raw scrollTop so the rate
-        // (px of screenshot travel per px of page scroll) is identical on
-        // both mobile (tall stacked layout) and desktop (short scattered layout).
-        const travel = Math.min(scrollTop * speed, maxTravel);
+        const travel = Math.min(scrollLeft * speed, maxTravel);
         screenshot.style.transform = `translateY(${-travel}px)`;
       });
 
@@ -60,58 +45,30 @@
     });
   }
 
-  // Listen to scroll
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  // Also run once on load
+  floor.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
 
 
 // ============================================
-// Subtle parallax on mouse move (desktop only)
+// Redirect vertical wheel events to horizontal scroll
+// Lets desktop mouse-wheel users scroll the device floor
+// without needing a trackpad or horizontal scrollbar.
 // ============================================
 (function () {
-  if (window.matchMedia('(hover: none)').matches) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
   const floor = document.getElementById('deviceFloor');
   if (!floor) return;
 
-  let ticking = false;
+  floor.addEventListener('wheel', (e) => {
+    // If the gesture is already horizontal (trackpad swipe), let it pass through
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
 
-  document.addEventListener('mousemove', (e) => {
-    if (ticking) return;
-    ticking = true;
-
-    requestAnimationFrame(() => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 2;
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
-      const devices = floor.querySelectorAll('.device');
-      devices.forEach((device, i) => {
-        const depth = (i % 3 + 1) * 0.5;
-        const moveX = x * depth * 3;
-        const moveY = y * depth * 2;
-
-        device.style.setProperty('--parallax-x', `${moveX}px`);
-        device.style.setProperty('--parallax-y', `${moveY}px`);
-      });
-
-      ticking = false;
+    e.preventDefault();
+    floor.scrollBy({
+      left: e.deltaY * 1.2,
+      behavior: 'auto'   // 'auto' avoids fighting with scroll-snap
     });
-  });
-
-  // Apply parallax via CSS translate property (additive to transform)
-  const style = document.createElement('style');
-  style.textContent = `
-    @media (min-width: 768px) {
-      .device {
-        translate: var(--parallax-x, 0) var(--parallax-y, 0);
-      }
-    }
-  `;
-  document.head.appendChild(style);
+  }, { passive: false });
 })();
 
 
@@ -123,21 +80,21 @@
 
   const devices = document.querySelectorAll('.device');
 
+  // Start all devices invisible
+  devices.forEach((device) => {
+    device.classList.add('device--hidden');
+  });
+
+  // Reveal with staggered delay
   devices.forEach((device, i) => {
-    device.style.opacity = '0';
-    device.style.transform += ' translateY(20px)';
-
     setTimeout(() => {
-      device.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-      device.style.opacity = '1';
-      device.style.transform = device.style.transform.replace(' translateY(20px)', '');
+      device.classList.remove('device--hidden');
+      device.classList.add('device--visible');
 
-      // Clean up inline styles after animation so CSS handles hover
-      setTimeout(() => {
-        device.style.opacity = '';
-        device.style.transform = '';
-        device.style.transition = '';
-      }, 700);
+      // Clean up the transition class once animation completes
+      device.addEventListener('transitionend', () => {
+        device.classList.remove('device--visible');
+      }, { once: true });
     }, 150 + i * 120);
   });
 })();
