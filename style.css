@@ -232,6 +232,8 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   z-index: 1;
   overflow: hidden;
   border-radius: 4px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* iPhone screen area */
