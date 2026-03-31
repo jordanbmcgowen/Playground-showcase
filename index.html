@@ -26,13 +26,28 @@
 <meta property="og:description" content="A collection of AI-powered web projects by Jordan McGowen.">
 
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
 <main class="scene">
   <header class="site-header">
-    <span class="site-name">jordan mcgowen</span>
+    <div class="napkin" id="napkin">
+      <button class="napkin__toggle" id="napkinToggle" aria-label="Collapse note">✕</button>
+      <div class="napkin__body">
+        <p class="napkin__line" style="--i:0">so i started 2026 with a plan: one site per month.</p>
+        <p class="napkin__line" style="--i:1">that lasted about a week. turns out i had way more ideas.</p>
+        <p class="napkin__line" style="--i:2">lost count fast — so this page is where i'm keeping track.</p>
+        <p class="napkin__line napkin__line--aside" style="--i:3">⚠ not a pro dev. everything here was vibe-coded with ai tools —</p>
+        <p class="napkin__line napkin__line--aside" style="--i:4">claude, perplexity, cursor, openai &amp; gemini. no gatekeeping.</p>
+        <p class="napkin__line napkin__line--aside" style="--i:5">none of this is "complete" or perfect. just experiments. enjoy!</p>
+        <p class="napkin__line napkin__line--cta" style="--i:6">find something broken? → <a href="mailto:broken@jordanmcgowen.com">broken@jordanmcgowen.com</a></p>
+      </div>
+      <span class="napkin__mini">jordan's playground ✏</span>
+    </div>
   </header>
 
   <div class="device-floor" id="deviceFloor">
