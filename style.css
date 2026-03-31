@@ -5,9 +5,9 @@
   --font-body: 'General Sans', 'Helvetica Neue', sans-serif;
   --font-display: 'Clash Display', 'General Sans', sans-serif;
 
-  --color-text: #e8e6e1;
-  --color-text-muted: #a09e96;
-  --color-text-faint: #6b6960;
+  --color-text: #1a1a18;
+  --color-text-muted: #6b6960;
+  --color-text-faint: #a09e96;
   --color-accent: #5eead4;
 
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -62,7 +62,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   color: var(--color-text);
-  background: #2a2a28;
+  background: #f0f0ee;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -76,24 +76,12 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 }
 
 /* ============================================
-   CONCRETE FLOOR BACKGROUND
+   BACKGROUND
    ============================================ */
 .scene {
   min-height: 100dvh;
   position: relative;
-  background:
-    url('./assets/concrete-bg.jpg') center / 800px repeat;
-}
-
-/* Subtle vignette overlay to add depth */
-.scene::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.35) 100%);
-  pointer-events: none;
-  z-index: 1;
+  background: #f0f0ee;
 }
 
 /* ============================================
@@ -109,7 +97,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   justify-content: space-between;
   align-items: center;
   padding: var(--space-4) var(--space-6);
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(240,240,238,0.9) 0%, transparent 100%);
 }
 
 .site-name {
@@ -118,7 +106,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--color-text);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  text-shadow: none;
 }
 
 .site-tag {
@@ -127,7 +115,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   color: var(--color-text-muted);
   text-transform: lowercase;
   letter-spacing: 0.08em;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  text-shadow: none;
 }
 
 /* ============================================
