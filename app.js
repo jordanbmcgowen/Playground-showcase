@@ -141,19 +141,3 @@
     }, 150 + i * 120);
   });
 })();
-
-
-// ============================================
-// Napkin note: collapse / expand toggle
-// ============================================
-(function () {
-  const napkin = document.getElementById('napkin');
-  const toggle = document.getElementById('napkinToggle');
-  if (!napkin || !toggle) return;
-
-  toggle.addEventListener('click', () => {
-    const collapsed = napkin.classList.toggle('is-collapsed');
-    toggle.textContent = collapsed ? '✏' : '✕';
-    toggle.setAttribute('aria-label', collapsed ? 'Expand note' : 'Collapse note');
-  });
-})();
