@@ -1,4 +1,88 @@
 // ============================================
+// Dynamic device layout (desktop)
+// Automatically positions devices in rows of 3
+// with staggered y-offsets and alternating rotations.
+// Scales to any number of devices — just add HTML.
+// ============================================
+(function () {
+  var COLS = 3;
+  var ROW_GAP = 30;        // % between row start positions
+  var START_Y = 2;         // % from top for first row
+  var Y_JITTER = [0, 4, -1];
+  var ROTATIONS = [-1.5, -6, 2, 4, -3, 6, 5, -3, -4, -5, 3, -2];
+
+  function layout() {
+    var floor = document.getElementById('deviceFloor');
+    if (!floor) return;
+    var devices = Array.from(floor.querySelectorAll('.device'));
+    if (!devices.length) return;
+
+    // Mobile: clear inline positioning, flexbox handles layout
+    if (window.innerWidth < 768) {
+      devices.forEach(function (d) {
+        d.style.removeProperty('--x');
+        d.style.removeProperty('--y');
+        d.style.removeProperty('--rot');
+      });
+      floor.style.removeProperty('min-height');
+      return;
+    }
+
+    var floorW = floor.offsetWidth;
+
+    // Group devices into rows
+    var rows = [];
+    for (var i = 0; i < devices.length; i += COLS) {
+      rows.push(devices.slice(i, i + COLS));
+    }
+
+    rows.forEach(function (row, ri) {
+      // Read actual rendered widths (CSS sets explicit sizes per device type)
+      var widths = row.map(function (d) { return d.offsetWidth; });
+      var total = widths.reduce(function (a, b) { return a + b; }, 0);
+      var gap = (floorW - total) / (row.length + 1);
+
+      var x = gap;
+      row.forEach(function (d, ci) {
+        var gi = ri * COLS + ci;
+        d.style.setProperty('--x', ((x / floorW) * 100).toFixed(1) + '%');
+        d.style.setProperty('--y', (START_Y + ri * ROW_GAP + Y_JITTER[ci % Y_JITTER.length]) + '%');
+        d.style.setProperty('--rot', ROTATIONS[gi % ROTATIONS.length] + 'deg');
+        x += widths[ci] + gap;
+      });
+    });
+
+    // Scale floor height to fit all rows + room for tallest device
+    floor.style.minHeight = 'max(100dvh, ' + (rows.length * 450) + 'px)';
+  }
+
+  // Debounced resize handler
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layout, 150);
+  });
+
+  layout();
+})();
+
+
+// ============================================
+// GitHub link click isolation
+// Prevents clicks on the GitHub icon from bubbling
+// up to the parent device link (which navigates to
+// the live site).
+// ============================================
+(function () {
+  document.querySelectorAll('.device__github').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+  });
+})();
+
+
+// ============================================
 // Scroll-linked screenshot scrolling within devices
 // As the user scrolls the page, the screenshots
 // inside each device scroll proportionally, creating
