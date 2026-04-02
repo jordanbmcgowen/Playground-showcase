@@ -426,7 +426,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 }
 
 @media (min-width: 768px) {
-  .device:hover .device__label {
+  .device__label {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
@@ -468,9 +468,6 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 
 /* GitHub repo link inside label */
 .device__github {
-  position: absolute;
-  bottom: var(--space-2);
-  left: var(--space-3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -491,7 +488,39 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   height: 14px;
 }
 
-/* Mobile: dark text on light background, inline GitHub icon */
+/* Website link icon inside label */
+.device__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0f0ee;
+  opacity: 0.4;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+.device__link:hover {
+  opacity: 1;
+  color: #ffffff;
+}
+
+.device__link-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Icon row: GitHub + website link side by side */
+.device__icons {
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Mobile: dark text on light background, inline icons */
 @media (max-width: 767px) {
   .device__title {
     color: var(--color-text);
@@ -499,9 +528,16 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   .device__desc {
     color: var(--color-text-muted);
   }
-  .device__github {
+  .device__icons {
     position: static;
     margin-top: var(--space-2);
+    justify-content: center;
+  }
+  .device__icons .device__github {
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+  .device__link {
     color: var(--color-text-muted);
     opacity: 0.6;
   }

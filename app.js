@@ -74,7 +74,7 @@
 // the live site).
 // ============================================
 (function () {
-  document.querySelectorAll('.device__github').forEach(function (link) {
+  document.querySelectorAll('.device__github, .device__link').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.stopPropagation();
     });
