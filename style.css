@@ -233,6 +233,12 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
    ============================================ */
 
 /* The frame image determines the device's intrinsic size */
+.device__primary-link {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+
 .device__frame {
   position: relative;
   z-index: 2;
