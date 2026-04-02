@@ -6,7 +6,7 @@
 // ============================================
 (function () {
   var COLS = 3;
-  var ROW_GAP = 28;        // % between row start positions (extra room for labels)
+  var ROW_GAP = 35;        // % between row start positions (extra room for visible labels)
   var START_Y = 2;         // % from top for first row
   var Y_JITTER = [0, 3, -1];
   var ROTATIONS = [-1.5, -6, 2, 4, -3, 6, 5, -3, -4, -5, 3, -2];
@@ -53,7 +53,7 @@
     });
 
     // Scale floor height to fit all rows + room for tallest device
-    floor.style.minHeight = 'max(100dvh, ' + (rows.length * 300) + 'px)';
+    floor.style.minHeight = 'max(100dvh, ' + (rows.length * 420) + 'px)';
   }
 
   // Debounced resize handler

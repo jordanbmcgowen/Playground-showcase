@@ -427,34 +427,33 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 
 @media (min-width: 768px) {
   .device__label {
-    position: relative;
+    /* Anchor below the device frame, constrained to device width */
+    position: absolute;
     bottom: auto;
-    left: auto;
+    top: 100%;
+    left: 0;
     transform: none;
     opacity: 1;
+    width: 100%;
+    max-width: none;
     background: none;
     backdrop-filter: none;
     box-shadow: none;
     padding: var(--space-2) 0 0;
-    max-width: none;
-    width: 100%;
-    min-width: 0;
     text-align: center;
-    align-items: center;
+    align-items: stretch;
     border-radius: 0;
     pointer-events: none;
     overflow: hidden;
   }
 
   .device__title {
-    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .device__desc {
-    max-width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
   }
