@@ -68,10 +68,10 @@
 
 
 // ============================================
-// GitHub link click isolation
-// Prevents clicks on the GitHub icon from bubbling
-// up to the parent device link (which navigates to
-// the live site).
+// Label icon click isolation
+// Keeps metadata icon clicks scoped to their own anchors,
+// even with the primary screenshot/frame link living in the
+// same device card.
 // ============================================
 (function () {
   document.querySelectorAll('.device__github, .device__link').forEach(function (link) {
