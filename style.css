@@ -438,10 +438,25 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
     padding: var(--space-2) 0 0;
     max-width: none;
     width: 100%;
+    min-width: 0;
     text-align: center;
     align-items: center;
     border-radius: 0;
     pointer-events: none;
+    overflow: hidden;
+  }
+
+  .device__title {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .device__desc {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 }
 
@@ -533,10 +548,6 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   pointer-events: auto;
 }
 
-/* Mobile: remove leftover overrides (base styles already use light-bg colors) */
-@media (max-width: 767px) {
-  /* icons and text inherit base styles */
-}
 
 /* ============================================
    FOOTER
