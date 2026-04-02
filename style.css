@@ -249,8 +249,8 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   z-index: 1;
   overflow: hidden;
   border-radius: 4px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  -webkit-clip-path: inset(0 round 4px);
+  clip-path: inset(0 round 4px);
 }
 
 /* iPhone screen area */
@@ -260,6 +260,8 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   width: var(--iphone-screen-width);
   height: var(--iphone-screen-height);
   border-radius: 6% / 3%;
+  -webkit-clip-path: inset(0 round 6% / 3%);
+  clip-path: inset(0 round 6% / 3%);
 }
 
 /* MacBook screen area */
@@ -269,6 +271,8 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   width: var(--macbook-screen-width);
   height: var(--macbook-screen-height);
   border-radius: 1.2% / 1.6%;
+  -webkit-clip-path: inset(0 round 1.2% / 1.6%);
+  clip-path: inset(0 round 1.2% / 1.6%);
 }
 
 /* iPad screen area */
@@ -278,6 +282,8 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   width: var(--ipad-screen-width);
   height: var(--ipad-screen-height);
   border-radius: 3% / 2.2%;
+  -webkit-clip-path: inset(0 round 3% / 2.2%);
+  clip-path: inset(0 round 3% / 2.2%);
 }
 
 /* Screenshot image: fills the clip area with no gaps.
