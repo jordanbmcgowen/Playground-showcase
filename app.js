@@ -6,9 +6,9 @@
 // ============================================
 (function () {
   var COLS = 3;
-  var ROW_GAP = 14;        // % between row start positions
+  var ROW_GAP = 20;        // % between row start positions
   var START_Y = 2;         // % from top for first row
-  var Y_JITTER = [0, 2, -1];
+  var Y_JITTER = [0, 3, -1];
   var ROTATIONS = [-1.5, -6, 2, 4, -3, 6, 5, -3, -4, -5, 3, -2];
 
   function layout() {
@@ -40,7 +40,7 @@
       // Read actual rendered widths (CSS sets explicit sizes per device type)
       var widths = row.map(function (d) { return d.offsetWidth; });
       var total = widths.reduce(function (a, b) { return a + b; }, 0);
-      var gap = Math.min((floorW - total) / (row.length + 1), floorW * 0.06);
+      var gap = (floorW - total) / (row.length + 1);
 
       var x = gap;
       row.forEach(function (d, ci) {
@@ -53,7 +53,7 @@
     });
 
     // Scale floor height to fit all rows + room for tallest device
-    floor.style.minHeight = 'max(100dvh, ' + (rows.length * 240) + 'px)';
+    floor.style.minHeight = 'max(100dvh, ' + (rows.length * 300) + 'px)';
   }
 
   // Debounced resize handler
