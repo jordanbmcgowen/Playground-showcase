@@ -6,9 +6,11 @@
 // ============================================
 (function () {
   var COLS = 3;
-  var ROW_GAP = 35;        // % between row start positions (extra room for visible labels)
-  var START_Y = 2;         // % from top for first row
+  var START_Y = 24;        // px from top for first row
+  var ROW_MARGIN = 36;     // px between row blocks (after tallest device+label)
   var Y_JITTER = [0, 3, -1];
+  var H_GAP_MIN = 18;      // px lower clamp so cards never touch
+  var H_GAP_MAX = 180;     // px upper clamp so spacing cannot explode on huge screens
   var ROTATIONS = [-1.5, -6, 2, 4, -3, 6, 5, -3, -4, -5, 3, -2];
 
   function layout() {
@@ -36,24 +38,46 @@
       rows.push(devices.slice(i, i + COLS));
     }
 
+    var rowBaseY = START_Y;
+    var usedHeight = START_Y;
+
     rows.forEach(function (row, ri) {
       // Read actual rendered widths (CSS sets explicit sizes per device type)
       var widths = row.map(function (d) { return d.offsetWidth; });
       var total = widths.reduce(function (a, b) { return a + b; }, 0);
-      var gap = (floorW - total) / (row.length + 1);
+      var rawGap = (floorW - total) / (row.length + 1);
+      var gap = Math.max(H_GAP_MIN, Math.min(H_GAP_MAX, rawGap));
+
+      // If clamped gap overflows the row, rebalance to fit while keeping a safe minimum.
+      var required = total + gap * (row.length + 1);
+      if (required > floorW) {
+        gap = Math.max(H_GAP_MIN, (floorW - total) / (row.length + 1));
+      }
 
       var x = gap;
+      var rowTallest = 0;
       row.forEach(function (d, ci) {
         var gi = ri * COLS + ci;
+        var frame = d.querySelector('.device__frame');
+        var label = d.querySelector('.device__label');
+        var frameHeight = frame ? frame.offsetHeight : 0;
+        var labelHeight = label ? label.offsetHeight : 0;
+        var deviceVisualHeight = frameHeight + labelHeight;
+
+        if (deviceVisualHeight > rowTallest) rowTallest = deviceVisualHeight;
+
         d.style.setProperty('--x', ((x / floorW) * 100).toFixed(1) + '%');
-        d.style.setProperty('--y', (START_Y + ri * ROW_GAP + Y_JITTER[ci % Y_JITTER.length]) + '%');
+        d.style.setProperty('--y', (rowBaseY + Y_JITTER[ci % Y_JITTER.length]) + 'px');
         d.style.setProperty('--rot', ROTATIONS[gi % ROTATIONS.length] + 'deg');
         x += widths[ci] + gap;
       });
+
+      rowBaseY += rowTallest + ROW_MARGIN;
+      usedHeight += rowTallest + ROW_MARGIN;
     });
 
-    // Scale floor height to fit all rows + room for tallest device
-    floor.style.minHeight = 'max(100dvh, ' + (rows.length * 420) + 'px)';
+    // Scale floor height to fit all measured rows (including labels) and row margins.
+    floor.style.minHeight = 'max(100dvh, ' + Math.ceil(usedHeight + 40) + 'px)';
   }
 
   // Debounced resize handler
