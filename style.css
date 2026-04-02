@@ -173,14 +173,14 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
 /* Desktop: absolute positioned scattered layout */
 @media (min-width: 768px) {
   .device-floor {
-    min-height: max(100dvh, 980px);
-    padding: 80px 40px 80px;
+    min-height: max(100dvh, 800px);
+    padding: 40px 20px 60px;
   }
 }
 
 @media (min-width: 1200px) {
   .device-floor {
-    min-height: max(100dvh, 1020px);
+    min-height: max(100dvh, 840px);
   }
 }
 
@@ -204,6 +204,8 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
     left: var(--x);
     top: var(--y);
     transform: rotate(var(--rot));
+    padding-bottom: 60px;
+    margin-bottom: -60px;
   }
   .device:hover {
     transform: rotate(0deg) scale(1.05) translateY(-12px);
@@ -404,7 +406,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
    ============================================ */
 .device__label {
   position: absolute;
-  bottom: -8px;
+  bottom: 52px;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
   width: max-content;
@@ -429,6 +431,7 @@ img { display: block; max-width: 100%; height: auto; user-select: none; pointer-
   .device:hover .device__label {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
   }
 }
 
